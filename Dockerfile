@@ -1,5 +1,5 @@
-# Use a base image with openjdk 21
-FROM eclipse-temurin:21-jdk-jammy
+# Use a base image with node and yarn
+FROM node:22-alpine
 
 # Add metadata labels
 LABEL org.opencontainers.image.source="https://github.com/erodde/mycore-website"
@@ -14,14 +14,6 @@ RUN apt-get update && \
     apt-get install -y curl git && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Maven 3.9.6
-ENV MAVEN_VERSION=3.9.6
-ENV MAVEN_HOME=/opt/maven/apache-maven-${MAVEN_VERSION}
-ENV PATH=${MAVEN_HOME}/bin:${PATH}
-
-RUN mkdir -p ${MAVEN_HOME} && \
-    curl -fsSL https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar xzf - -C ${MAVEN_HOME} --strip-components=1
-
 # Install gohugo extended 0.89.4
 ENV HUGO_VERSION=0.89.4
 RUN curl -L https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz | tar xzf - -C /tmp && \
@@ -29,10 +21,10 @@ RUN curl -L https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/
     chmod +x /usr/local/bin/hugo
 
 # Copy the pom.xml to the container
-COPY pom.xml /app/
+COPY package.json yarn.lock /app/
 
 # Load all dependencies necessary for building
-RUN mvn dependency:go-offline
+RUN yarn install --immutable --immutable-cache --check-cache
 
 # Set default args needed inside the entrypoint
 ARG MYCORE_WEBSITE_REPO_URL="https://github.com/MyCoRe-Org/mycore-website.git"

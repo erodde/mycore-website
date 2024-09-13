@@ -15,8 +15,8 @@ git clone $1 /site
 # Set the working directory to the cloned project
 cd /site
 
-# Build the Java project offline
-mvn -o clean compile
+# Build the project
+yarn build
 
 # Run Hugo inside the mycore.org/ subfolder
 cd /site/mycore.org
