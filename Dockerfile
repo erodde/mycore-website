@@ -10,9 +10,7 @@ LABEL org.opencontainers.image.licenses="MIT"
 WORKDIR /app
 
 # Install curl and git
-RUN apt-get update && \
-    apt-get install -y curl git && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache curl git
 
 # Install gohugo extended 0.89.4
 ENV HUGO_VERSION=0.89.4
