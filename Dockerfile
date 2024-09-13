@@ -31,4 +31,5 @@ ARG MYCORE_BASE_URL="https://www.mycore.de"
 # Set the entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh", "${MYCORE_WEBSITE_REPO_URL}", "${MYCORE_BASE_URL}"]
+ENTRYPOINT ["sh"]
+CMD ["/entrypoint.sh ${MYCORE_WEBSITE_REPO_URL} ${MYCORE_BASE_URL}"]
