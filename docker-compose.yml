@@ -6,3 +6,4 @@ services:
       MYCORE_BASE_URL: ${MYCORE_BASE_URL}
     volumes:
       - $PWD/www:/public
+

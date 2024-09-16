@@ -6,6 +6,7 @@ on:
       - main
 #    paths:
 #      - 'pom.xml'
+#      - 'package.json'
 
 jobs:
   build:
