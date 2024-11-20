@@ -42,6 +42,7 @@ jobs:
 
       - name: Build website
         run: hugo
+        working-directory: ./mycore.org
 
 
       - name: Archive website content
