@@ -3,7 +3,8 @@ name: Build and upload MyCoRe website docker image
 on:
   push:
     branches:
-      - main
+#      - main
+      - never-deactivated
 #    paths:
 #      - 'pom.xml'
 #      - 'package.json'
