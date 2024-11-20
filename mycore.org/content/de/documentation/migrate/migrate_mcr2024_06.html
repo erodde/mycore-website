@@ -43,7 +43,7 @@ date: "2024-07-05"
         <li>SOLR 8.11.2 oder höher</li> <!-- Empfehlung für SOLR 9 ?? -->
         <li>
           eine
-          <a href="http://docs.jboss.org/hibernate/orm/6.5/javadocs/org/hibernate/dialect/package-summary.html">hibernate-fähige</a>
+          <a href="https://docs.jboss.org/hibernate/orm/6.5/javadocs/org/hibernate/dialect/package-summary.html">hibernate-fähige</a>
           relationale Datenbank wie PostgreSQL 10 oder höher , MySQL/Maria-DB 10 oder höher, DB2; für Testzwecke genügt auch die integrierte Datenbank H2
         </li>
         <li>Git 2.26 oder höher</li>
@@ -76,7 +76,14 @@ date: "2024-07-05"
             <!-- Ist diese Umstellung zwingend ??? -->
        </ul>
      </li>   
-      </ul>
+	 <li>Backend
+	   <ul>
+	     <li>Das JPA-Model für Zugriffsschlüssel wurde um das Feld <code>uuid</code> erweitert. <br />
+	         Deshalb muss die Tabelle <code>MCRAccessKey</code> um die Spalte <code>uuid</code> mit dem Type UUID ergänzt werden.
+	         Das Schema kann automatisch über <code>MCR.JPA.Hbm2ddlAuto=update</code> aktualisiert werden.</li>
+	   </ul>
+	 </li>
+     </ul>
       
       <h3>... die ohne Migration eingeführt wurden</h3>
       <ul>
@@ -315,12 +322,66 @@ MCR.QueuedJob.Cleaner.Selectors.failedJobs.Enabled=true{{< /highlight >}}
              In Anlehnung an die vordefinierten Regeln können zudem eigene Regeln definiert werden.  
            </p>
          </li>
+        <li>
+          <p>
+            Mit <a href="https://mycore.atlassian.net/browse/MCR-3209">MCR-3209</a> wurden die ORCID-API Endpunkte teilweise verändert.
+          </p>
+          <p>
+            Der Endpunkt <code>/api/orcid/v1/object-status/v3/{objectID}</code> wurde in member und public aufgeteilt.<br />
+            So kann der Status explizit mittels <code>/api/orcid/v1/public/{orcid}/works/object/{objectId}</code> über die öffentliche ORCID API abgefragt werden.
+            Mit <code>/api/orcid/v1/member/{orcid}/works/object/{objectId}</code> kann der Status über die ORCID Member API abgefragt werden.
+          </p>
+          <p>
+            Ebenfalls hat sich das resultierende JSON verändert:<br /> mit <code>own</code> wird ggf. der Put-Code für das Objekt,
+            das über die Anwendung erstellt wurden, angegeben.<br />
+            <code>other</code> gibt ein Array mit Put-Codes von dem Objekt wieder, die nicht von der Anwendung erstellt wurden.
+          </p>
+          <p>
+            Der Pfad zum Erstellen eines Objekts wurde auf <code>/api/orcid/v1/member/{orcid}/works/object/{objectId}</code> geändert.
+          </p>
+          <p>
+            Der Endpunkt zum Revoken einer ORCID ist nun <code>/rsc/orcid/oauth/{orcid}</code> und passiert mit einem HTTP-DELETE-Request.
+          </p>
+          <p>
+            Die Methode <code>revokeORCID</code> in orcid-auth.js wurde umbenannt in <code>revokeOrcidOAuth</code>.
+          </p>
+        </li>
+        <li>
+          <p>
+            Mit <a href="https://mycore.atlassian.net/browse/MCR-3200">MCR-3200</a> werden keine Standardwerte mehr für die ORCID-User-Properties ausgeliefert,
+            sofern jene nicht existieren. Damit wird ermöglicht, dass im Frontend unterschieden werden kann, ob ein User bereits Properties festgelegt hat.
+            Dies kann beispielsweise wichtig werden, wenn sich die Standardwerte einmal ändern sollten und ein User diese nicht für sich übernommen bzw. für sich gespeichert hat.
+            Außerdem können so einfacher weitere Properties hinzugefügt werden, denn so ist eine Abgrenzung bereits gespeicherter Properties möglich.
+            Durch diese Umstellung müssen die Properties ggf. im Frontend anders interpretiert werden.
+          </p>
+        </li>
        </ul>
       <p></p>
 
-      <h3>Datenbank anpassen</h3>
+      <h3>Datenbank(-konfiguration) anpassen</h3>
+      <h4>Anpassung der Spaltenlänge in MCRJobParameter-Tabelle</h4>
+      <p>Falls beim Update die Datenbank nicht neu erstellt wird, ist folgende Anpassungen an den Tabellen notwendig (siehe <a href="https://mycore.atlassian.net/browse/MCR-3125">MCR-3125</a>):</p>
+{{< highlight sql "linenos=table">}}
+PostgreSQL:>  ALTER TABLE mcrjobparameter ALTER COLUMN paramvalue SET DATA TYPE varchar(16384);
+        H2:>  alter table mcrjobparameter alter column paramvalue varchar(16384);{{< /highlight >}}
+      
+      <h4>H2 Migration</h4>
       <p>
+      Auf Grund der Aktualisierung von MyCoRe auf Hibernate 6.3.x und Jakarta Persistence 3.1 muss eine bestehende H2-Datenbank auf Version 2.x geupdatet werden.
+      Die notwendigen Schritte sind im Ticket <a href="https://mycore.atlassian.net/browse/MCR-2647">MCR-2637</a> beschrieben.
       </p>
       
-   </div>
+      <h4>H2: Konflikte beim Spaltennamen</h4>
+      <p>Bei der Datenbank <strong>H2 (Version 2.x)</strong> gibt es Namenskonflikte bei einem Spaltennamen. Deshalb müssen folgende JPA-Properties gesetzt sein:<p/>
+      <h6>via MyCoRe-Properties</h6>
+     {{< highlight java "linenos=table">}}
+MCR.JPA.GloballyQuotedIdentifiers=true
+MCR.JPA.GloballyQuotedIdentifiers.SkipColumnDefinitions=true{{< /highlight >}}
+      <h6>oder (veraltet): persistence.xml</h6>
+      {{< highlight xml "linenos=table">}}
+<property name="hibernate.globally_quoted_identifiers" value="true" />
+<property name="hibernate.globally_quoted_identifiers_skip_column_definitions" value="true" />{{< /highlight >}}
+      
+      <p></p>
+    </div>
 

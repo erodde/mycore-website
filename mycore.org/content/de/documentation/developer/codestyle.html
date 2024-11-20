@@ -27,7 +27,7 @@ date: "2022-09-23"
     <p>Die Einstellung erfolgt in Eclipse global für alle Dateien unter:</p>
     <ul>
       <li>Anwendungs-Menü: <br />
-          Window &rarr; Preference &rarr; Workspace &rarr; Text file encoding &rarr; Other: UTF-8</li>
+          Window &rarr; Preferences &rarr; General &rarr; Workspace &rarr; Text file encoding &rarr; Other: UTF-8</li>
     </ul>
     <p>Für einzelne Dateien kann die Eigenschaft auch in den <em>Properties</em> gesetzt werden:
     <ul>
@@ -53,7 +53,7 @@ date: "2022-09-23"
   <p>Die Einstellung erfolgt unter:</p>
   <ul>
     <li>Anwendungs-Menü: <br />
-        Window &rarr; Preference &rarr; Java &rarr; Code Style &rarr; Formatter</li>
+        Window &rarr; Preferences &rarr; Java &rarr; Code Style &rarr; Formatter</li>
   </ul>
   <p>
     Dort wählt man das Profile <strong>Java Conventions [built-in]</strong> als Vorlage und nimmt folgende Anpassungen vor:
@@ -64,6 +64,7 @@ date: "2022-09-23"
           <li>Tab Policy: Spaces only</li>
           <li>Indentation size: 4 (default)</li>
           <li>Tab size: 4</li>
+          <li>Statements within 'switch' body: [on]</li>
         </ul>
     </li>
     <li>New Lines:
@@ -80,13 +81,20 @@ date: "2022-09-23"
       </ul>
     </li>
     <li>Line wrapping / Wrapping settings:<br />
-      <em>(Diese werden global für alle folgenden Einträge gesetzt.
-       Durch Anklicken des Checkbox-Symbols am Zeilenende öffnen sich mehrere Auswahlboxen)</em>
+      <em>(Diese werden global für alle folgenden Einträge gesetzt.<br />
+       Durch Anklicken des Checkbox-Symbols am Zeilenende öffnen sich mehrere Auswahlboxen.)</em>
       <ul>
         <li>Auswahl 1: "Wrap before operators"</li>
         <li>Auswahl 2: "Wrap where necessary"</li>
       </ul>
     </li>
+    <li>Line wrapping / Wrapping settings / Other expressions / Assignments:<br />
+      <em>(Nimmt die vorherige Einstellung für einfache Variablenzuweisungen zurück.)</em>
+      <ul>
+        <li>Auswahl 1: "Wrap after operators"</li>
+      </ul>
+    </li>
+    
     <li>Comments:<br />
       <ul>
         <li>Maxium width: 120</li>
@@ -100,7 +108,7 @@ date: "2022-09-23"
   <p>Die Vorlage wird dann unter dem Namen <strong>MyCoRe</strong> gespeichert.</p>
   <p>Eclipse-Nutzer können sich einfach die 
       <a href="/downloads/mycore-javastyle.xml">Code-Style-Definition</a> herunterladen und importieren<br /> 
-      (Anwendungs-Menü: Window &rarr; Preference &rarr; Java &rarr; Code Style &rarr; Formatter). 
+      (Anwendungs-Menü: Window &rarr; Preferences &rarr; Java &rarr; Code Style &rarr; Formatter). 
   </p>
   
   <h3>Javascript-Code Formatierung</h3>
@@ -116,7 +124,7 @@ date: "2022-09-23"
   <p>Die Einstellung erfolgt unter:</p>
   <ul>
     <li>Anwendungs-Menü: <br />
-        Window &rarr; Preference &rarr; Web &rarr; Client-side JavaScript &rarr; Formatter</li>
+        Window &rarr; Preferences &rarr; Web &rarr; Client-side JavaScript &rarr; Formatter</li>
   </ul>
   <p>
     Dort wählt man das Profile <strong>JavaScript Conventions [built-in]</strong> als Vorlage und nimmt folgende Anpassungen vor:
@@ -145,6 +153,7 @@ date: "2022-09-23"
     <li>Comments:<br />
       <ul>
         <li>Maxium width: 120</li>
+        <li>Count width from comment's starting position: [off]</li>
         <li>Enable JSDoc comment formatting: [off]</li>
         <li>Enable block comment formatting: [off]</li>
         <li>Enable line comment formatting: [off]</li>
@@ -154,7 +163,7 @@ date: "2022-09-23"
   <p>Die Vorlage wird dann unter dem Namen <strong>MyCoRe Javascript</strong> gespeichert.</p>
   <p>Eclipse-Nutzer können sich einfach die 
       <a href="/downloads/mycore-javascriptstyle.xml">Code-Style-Definition</a> herunterladen und importieren<br /> 
-      (Anwendungs-Menü: Window &rarr; Preference &rarr; Web &rarr; Client-side JavaScript &rarr; Formatter). 
+      (Anwendungs-Menü: Window &rarr; Preferences &rarr; Web &rarr; Client-side JavaScript &rarr; Formatter). 
   </p>
   
   <h3>XML-Code Formatierung</h3>
@@ -209,7 +218,28 @@ date: "2022-09-23"
       <li>Anwendungs-Menü: <br />
           Window &rarr; Preferences &rarr; Web &rarr; HTML Files &rarr; Editor</li>
     </ul>
-    Dort stell man folgendes ein:
+    Dort stellt man folgendes ein:
+    <ul>
+      <li>Line width: 120</li>
+      <li>Indent using spaces: [on]</li>
+      <li>Indentation size:2</li>
+    </ul>
+
+  <h3>CSS-Code Formatierung</h3>
+    <h4>Allgemeines</h4>
+    <p>Für CSS-Dateien gelten dieselben Einstellungen wie für HTML-Dateien:</p>
+    <ul>
+      <li>maximale Zeilenlänge 120</li>
+      <li>Für Einrückungen sind nur Leerzeichen zu verwenden.</li>
+      <li>Pro Tab sind 2 Zeichen Einrückung vorgesehen.</li>
+    </ul>
+    <h4>Konfiguration unter Eclipse</h4>
+    <p>Die Einstellung erfolgt unter:</p>
+    <ul>
+      <li>Anwendungs-Menü: <br />
+          Window &rarr; Preferences &rarr; Web &rarr; CSS Files &rarr; Editor</li>
+    </ul>
+    Dort stellt man folgendes ein:
     <ul>
       <li>Line width: 120</li>
       <li>Indent using spaces: [on]</li>
@@ -244,7 +274,7 @@ date: "2022-09-23"
     {{< highlight java "linenos=table">}}
 /* 
  * This file is part of *** M y C o R e *** 
- * See http://www.mycore.de/ for details. 
+ * See https://www.mycore.de/ for details. 
  * 
  * This program is free software; you can use it, redistribute it 
  * and / or modify it under the terms of the GNU General Public License 

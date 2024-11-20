@@ -31,7 +31,7 @@ main:
 -     {identifier: gs_ma_install,           parent: getting_started,    name: MA - Maven Archetype,          weight: -95,      url: /documentation/getting_started/gs_ma_install}
 -     {identifier: gs_ma_customize,         parent: getting_started,    name: MA Initialisierung,            weight: -94,      url: /documentation/getting_started/gs_ma_customize}
 -     {identifier: gs_jpa,                  parent: getting_started,    name: Datenbank - JPA,               weight: -93,      url: /documentation/getting_started/gs_jpa}
--     {identifier: gs_solr8,                parent: getting_started,    name: Solr8-Integration,             weight: -92,      url: /documentation/getting_started/gs_solr8}
+-     {identifier: gs_solr,                parent: getting_started,    name: Solr-Integration,             weight: -92,      url: /documentation/getting_started/gs_solr}
 -     {identifier: gs_properties,           parent: getting_started,    name: Konfiguration & Properties,    weight: -91,      url: /documentation/getting_started/gs_properties}
 -   {identifier: apps,                    parent: documentation,      name: Anwendungen,                   weight: -98,      url: /documentation/apps}
 -     {identifier: apps_mir,                parent: apps,               name: MIR,                           weight: -99,      url: /documentation/apps/mir}
@@ -174,7 +174,7 @@ main:
 -       {identifier: dev_docs_news_blog,      parent: dev_docs,           name: News- und Blogbeiträge,      weight: -97,      url: /documentation/developer/dev_docs/dev_docs_news_blog}
 -       {identifier: dev_docs_guidelines,     parent: dev_docs,           name: Richtlinien,                 weight: -96,      url: /documentation/developer/dev_docs/dev_docs_guidelines}
 -       {identifier: dev_docs_howto,          parent: dev_docs,           name: Tipps und Tricks,            weight: -95,      url: /documentation/developer/dev_docs/dev_docs_howtos}
--     {identifier: apidocs,                   parent: developer,        name: Javadocs,                    weight: -90,      url: 'http://www.mycore.de/generated/mycore/apidocs'}
+-     {identifier: apidocs,                   parent: developer,        name: Javadocs,                    weight: -90,      url: 'https://www.mycore.de/generated/mycore/apidocs'}
 -     {identifier: dev_migrate_java_modules,  parent: developer,        name: Java-Modul-Migration,        weight: -87,      url: /documentation/developer/dev_migrate_to_java_modules}
 -     {identifier: dev_junit_tests,           parent: developer,        name: Modultests mit JUnit,        weight: -86,      url: /documentation/developer/dev_junit_tests}
 -     {identifier: dev_plugin,                parent: developer,        name: Eigene Plugins einbinden,    weight: -85,      url: /documentation/developer/dev_plugin}
@@ -185,7 +185,7 @@ main:
 -   {identifier: contact,               parent: community,             name: Kontaktaufnahme,              weight: -98,     url: /site/community/contact}
 -   {identifier: team,                  parent: community,             name: Team,                         weight: -97,     url: /site/community/team}
 -   {identifier: workshops,             parent: community,             name: Workshops,                    weight: -96,     url: /site/community/workshops}
--   {identifier: bugs,                  parent: community,             name: zum JIRA,               weight: -94,     url: 'http://mycore.atlassian.net'}
--   {identifier: wiki,                  parent: community,             name: zum Wiki,               weight: -93,     url: 'http://cmswiki.rrz.uni-hamburg.de/hummel#MyCoReWikiWiki'}
--   {identifier: maven,                 parent: community,             name: zu Maven,               weight: -92,     url: 'http://mvnrepository.com/artifact/org.mycore'}
+-   {identifier: bugs,                  parent: community,             name: zum JIRA,               weight: -94,     url: 'https://mycore.atlassian.net'}
+-   {identifier: wiki,                  parent: community,             name: zum Wiki,               weight: -93,     url: 'https://cmswiki.rrz.uni-hamburg.de/hummel#MyCoReWikiWiki'}
+-   {identifier: maven,                 parent: community,             name: zu Maven,               weight: -92,     url: 'https://mvnrepository.com/artifact/org.mycore'}
 -   {identifier: github,                parent: community,             name: zu Github,              weight: -91,     url: 'https://github.com/MyCoRe-Org'}
